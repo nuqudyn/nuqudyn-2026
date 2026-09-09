@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Swedish e-Science Academy Satellite on Numerical Methods in Quantum Spin Dynamics, Uppsala, October 14, 2026.">
+  <title>Numerical Methods in Quantum Spin Dynamics | Uppsala 2026</title>
+
+  <style>
+    :root {
+      --ink: #14213d;
+      --muted: #5f6b7a;
+      --accent: #7a1833;
+      --accent-dark: #5a1025;
+      --gold: #d7ad47;
+      --paper: #ffffff;
+      --soft: #f5f7fa;
+      --line: #e4e8ee;
+      --deep: #101827;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      background: var(--deep);
+      color: #fff;
+      font-size: 0.92rem;
+    }
+
+    .topbar .container {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      padding: 10px 0;
+    }
+
+    .topbar a {
+      color: #fff;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      min-height: 66px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+    }
+
+    .navlinks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      font-size: 0.95rem;
+    }
+
+    .navlinks a {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 610px;
+      display: flex;
+      align-items: end;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(10,18,34,0.94) 0%, rgba(10,18,34,0.76) 48%, rgba(10,18,34,0.32) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.35)),
+        url("images/uppsala.jpg") center/cover no-repeat;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 100px 0 90px;
+      max-width: 820px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 7px 13px;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.8rem, 7vw, 5.7rem);
+      line-height: 0.98;
+      font-weight: 700;
+      max-width: 900px;
+    }
+
+    .hero .subtitle {
+      margin: 0 0 26px;
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+      max-width: 760px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .hero-meta span {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.24);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 600;
+    }
+
+    .photo-note {
+      position: absolute;
+      right: 22px;
+      bottom: 22px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.75);
+      background: rgba(0,0,0,0.28);
+      padding: 6px 10px;
+      border-radius: 6px;
+    }
+
+    section {
+      padding: 78px 0;
+    }
+
+    section.alt {
+      background: var(--soft);
+    }
+
+    .section-label {
+      margin: 0 0 6px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    h2 {
+      margin: 0 0 25px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    h3 {
+      margin-top: 0;
+      line-height: 1.35;
+    }
+
+    .lead {
+      max-width: 880px;
+      font-size: 1.17rem;
+      color: #354256;
+    }
+
+    .notice {
+      margin-top: 28px;
+      padding: 20px 22px;
+      border-left: 4px solid var(--gold);
+      background: #fff9ea;
+      border-radius: 0 10px 10px 0;
+    }
+
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 30px;
+    }
+
+    .speaker {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 12px 30px rgba(18, 32, 53, 0.05);
+    }
+
+    .speaker .initial {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.25rem;
+      margin-bottom: 18px;
+    }
+
+    .speaker h3 {
+      margin-bottom: 4px;
+      font-size: 1.35rem;
+    }
+
+    .speaker p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .venue-card {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 30px;
+      padding: 32px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: white;
+      box-shadow: 0 12px 30px rgba(18, 32, 53, 0.05);
+    }
+
+    .venue-card strong {
+      color: var(--ink);
+    }
+
+    .venue-facts {
+      display: grid;
+      gap: 12px;
+    }
+
+    .fact {
+      padding: 14px 16px;
+      background: var(--soft);
+      border-radius: 10px;
+    }
+
+    .schedule {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 28px;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(18, 32, 53, 0.05);
+    }
+
+    .schedule th,
+    .schedule td {
+      text-align: left;
+      padding: 18px 20px;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .schedule th {
+      background: var(--deep);
+      color: white;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .schedule tr:last-child td {
+      border-bottom: none;
+    }
+
+    .schedule .time {
+      width: 150px;
+      white-space: nowrap;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .break-row td {
+      background: #fbf7ed;
+    }
+
+    .talk {
+      margin-top: 28px;
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: white;
+      box-shadow: 0 12px 30px rgba(18, 32, 53, 0.05);
+    }
+
+    .talk-number {
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .talk h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.55rem;
+      margin-bottom: 8px;
+    }
+
+    .authors {
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 22px;
+    }
+
+    .abstract {
+      color: #344154;
+    }
+
+    .committee {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      max-width: 800px;
+    }
+
+    .person {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 22px;
+      background: white;
+    }
+
+    .person strong {
+      display: block;
+      font-size: 1.08rem;
+      margin-bottom: 5px;
+    }
+
+    footer {
+      background: var(--deep);
+      color: rgba(255,255,255,0.8);
+      padding: 48px 0;
+    }
+
+    footer a {
+      color: white;
+    }
+
+    footer .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .small {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 780px) {
+      .navlinks {
+        display: none;
+      }
+
+      .hero {
+        min-height: 540px;
+      }
+
+      .speaker-grid,
+      .committee,
+      .venue-card {
+        grid-template-columns: 1fr;
+      }
+
+      .schedule,
+      .schedule tbody,
+      .schedule tr,
+      .schedule td {
+        display: block;
+        width: 100%;
+      }
+
+      .schedule thead {
+        display: none;
+      }
+
+      .schedule tr {
+        border-bottom: 1px solid var(--line);
+        padding: 10px 0;
+      }
+
+      .schedule td {
+        border: none;
+        padding: 6px 18px;
+      }
+
+      .schedule .time {
+        width: 100%;
+        padding-top: 14px;
+      }
+
+      section {
+        padding: 58px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="container">
+      <span>Swedish e-Science Academy Satellite Workshop</span>
+      <span>Uppsala · 14 October 2026</span>
+    </div>
+  </div>
+
+  <nav>
+    <div class="container">
+      <a class="brand" href="#top">NUQU 2026</a>
+      <div class="navlinks">
+        <a href="#about">About</a>
+        <a href="#speakers">Speakers</a>
+        <a href="#program">Program</a>
+        <a href="#talks">Talks</a>
+        <a href="#organizers">Organizers</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="container hero-content">
+      <div class="eyebrow">Swedish e-Science Academy Satellite</div>
+      <h1>Numerical Methods in Quantum Spin Dynamics</h1>
+      <p class="subtitle">
+        A focused workshop bringing together perspectives from open quantum systems,
+        spin dynamics, structure-preserving simulation, and scalable numerical methods.
+      </p>
+      <div class="hero-meta">
+        <span>14 October 2026</span>
+        <span>09:00–12:00</span>
+        <span>Ångström Laboratory · Uppsala</span>
+      </div>
+    </div>
+    <div class="photo-note">Replace <strong>images/uppsala.jpg</strong> with your preferred Uppsala photo</div>
+  </header>
+
+  <main>
+
+    <section id="about">
+      <div class="container">
+        <p class="section-label">About the workshop</p>
+        <h2>Quantum dynamics meets scientific computing</h2>
+
+        <p class="lead">
+          We are happy to announce our workshop on <strong>Numerical Methods in Quantum Spin Dynamics</strong>,
+          taking place on <strong>14 October 2026</strong> in <strong>Uppsala</strong>.
+        </p>
+
+        <p>
+          The goal of the workshop is to bring together researchers working at the interface of
+          quantum spin dynamics, open quantum systems, mathematical modeling, and scientific computing.
+          The morning is intended to provide a setting for expert discussions on recent physical models,
+          structure-preserving formulations, tensor techniques, and scalable numerical methods for
+          increasingly large quantum systems.
+        </p>
+
+        <div class="notice">
+          The workshop is hosted as a satellite to the
+          <a href="https://www.essenceofescience.se/w/es/en/about-essence/swedish-e-science-academy"
+             target="_blank" rel="noopener">Swedish e-Science Academy</a>.
+          Participants associated with any of the three eSSENCE partner universities
+          <strong>Umeå, Lund, and Uppsala</strong> will have their accommodation covered through eSSENCE.
+        </div>
+      </div>
+    </section>
+
+    <section class="alt" id="speakers">
+      <div class="container">
+        <p class="section-label">Invited speakers</p>
+        <h2>Speakers</h2>
+
+        <div class="speaker-grid">
+          <article class="speaker">
+            <div class="initial">EA</div>
+            <h3>Erik Aurell</h3>
+            <p>KTH Royal Institute of Technology, Stockholm, Sweden</p>
+          </article>
+
+          <article class="speaker">
+            <div class="initial">EBK</div>
+            <h3>Erna Begović Kovač</h3>
+            <p>University of Zagreb, Croatia</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="program">
+      <div class="container">
+        <p class="section-label">Program</p>
+        <h2>14 October 2026 · 09:00–12:00</h2>
+
+        <div class="venue-card">
+          <div>
+            <h3>Ångström Laboratory</h3>
+            <p>
+              The workshop will take place at Ångström Laboratory,
+              Uppsala University's major science and technology campus.
+            </p>
+          </div>
+
+          <div class="venue-facts">
+            <div class="fact"><strong>Address</strong><br>Hus 10, Regementsvägen 10, Uppsala</div>
+            <div class="fact"><strong>Presentation room</strong><br>101158, Floor 1</div>
+            <div class="fact"><strong>Date</strong><br>Wednesday, 14 October 2026</div>
+          </div>
+        </div>
+
+        <table class="schedule" aria-label="Workshop schedule">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Program</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="time">09:00–09:05</td>
+              <td><strong>Welcome to the workshop</strong></td>
+            </tr>
+            <tr>
+              <td class="time">09:05–09:50</td>
+              <td><strong>Erik Aurell</strong><br>A high-temperature limit penalizing high-frequency quantum fluctuations</td>
+            </tr>
+            <tr class="break-row">
+              <td class="time">09:50–10:15</td>
+              <td><strong>Coffee break</strong></td>
+            </tr>
+            <tr>
+              <td class="time">10:15–11:00</td>
+              <td><strong>Vahid Azimi-Mousolou &amp; Davoud Mirzaei</strong><br>Nonlinear dissipative quantum spin dynamics and their numerical solutions</td>
+            </tr>
+            <tr>
+              <td class="time">11:00–11:45</td>
+              <td><strong>Erna Begović Kovač</strong><br>Structure-preserving tensor compressions and applications to quantum dynamics</td>
+            </tr>
+            <tr>
+              <td class="time">11:45–12:00</td>
+              <td><strong>Discussion and closing remarks</strong></td>
+            </tr>
+            <tr class="break-row">
+              <td class="time">12:00–13:00</td>
+              <td><strong>Lunch</strong> · venue to be announced</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="alt" id="talks">
+      <div class="container">
+        <p class="section-label">Scientific program</p>
+        <h2>Talks &amp; abstracts</h2>
+
+        <article class="talk">
+          <div class="talk-number">Talk 1</div>
+          <h3>A high-temperature limit penalizing high-frequency quantum fluctuations</h3>
+          <div class="authors">
+            Erik Aurell · KTH Royal Institute of Technology, Stockholm, Sweden
+          </div>
+
+          <div class="abstract">
+            <p>
+              The time evolution of a quantum system interacting with an Ohmic bath of harmonic oscillators
+              is one of the most widely studied models of open quantum systems theory. It applies to many
+              physical situations in which damping becomes friction-like, or frequency independent, in the
+              semiclassical limit, including photon and phonon baths and superconducting qubits coupled to
+              resistive elements in quantum circuits.
+            </p>
+
+            <p>
+              Caldeira and Leggett famously used this model to investigate the classical limit of quantum
+              Brownian motion and macroscopic tunnelling. An important conceptual difficulty is that a
+              straightforward high-temperature limit leads to a quantum Markov evolution that is not a
+              completely positive trace-preserving (CPTP) map. In the language of Lindblad equations, one
+              of the jump rates is slightly negative, and the evolution is therefore not governed by a
+              proper Lindblad equation.
+            </p>
+
+            <p>
+              In this talk, the model will be revisited and an additional contribution to the decoherence
+              kernel will be derived in a new high-temperature limit at arbitrarily large cut-off frequency.
+              The resulting evolution is a Lindblad equation with positive jump rates. The additional term
+              reveals a mechanism for the classicalization of high-frequency quantum fluctuations through
+              damping. End contributions to the Feynman–Vernon kernel and the opposite low-temperature
+              regime, where long-time memory becomes important, will also be discussed.
+            </p>
+
+            <p class="small">
+              Based on joint work with Graeme Pleasance and Francesco Petruccione,
+              <em>Physical Review Letters</em> 137(5), 050405 (2026).
+            </p>
+          </div>
+        </article>
+
+        <article class="talk">
+          <div class="talk-number">Talk 2</div>
+          <h3>Nonlinear dissipative quantum spin dynamics and their numerical solutions</h3>
+          <div class="authors">
+            Vahid Azimi-Mousolou &amp; Davoud Mirzaei · Uppsala University, Uppsala, Sweden
+          </div>
+
+          <div class="abstract">
+            <p>
+              In the first part of the talk, we discuss the quantum formulation of nonlinear dissipative
+              spin dynamics. In particular, we introduce a quantum analogue of the Landau–Lifshitz–Gilbert
+              equation, discuss its geometric foundations and generalizations, and examine its physical
+              properties and potential applications in quantum technologies.
+            </p>
+
+            <p>
+              In the second part, we present a numerical method, called low-rank eigenmode integration
+              (LREI), for simulating these dynamics in the mixed-state regime, where exact solutions are
+              generally not available. LREI uses the low-rank structure of the density matrix together with
+              the sparsity of the Hamiltonian to substantially reduce memory requirements and computational
+              complexity, enabling simulations with millions of degrees of freedom. At the same time, the
+              method preserves the physical properties of the underlying models.
+            </p>
+          </div>
+        </article>
+
+        <article class="talk">
+          <div class="talk-number">Talk 3</div>
+          <h3>Structure-preserving tensor compressions and applications to quantum dynamics</h3>
+          <div class="authors">
+            Erna Begović Kovač · University of Zagreb, Croatia
+          </div>
+
+          <div class="abstract">
+            <p><em>Abstract to be announced.</em></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="organizers">
+      <div class="container">
+        <p class="section-label">Organizing committee</p>
+        <h2>Organizers &amp; contact</h2>
+
+        <div class="committee">
+          <div class="person">
+            <strong>Davoud Mirzaei</strong>
+            Uppsala University<br>
+            <a href="mailto:davoud.mirzaei@it.uu.se">davoud.mirzaei@it.uu.se</a>
+          </div>
+
+          <div class="person">
+            <strong>Vahid Azimi-Mousolou</strong>
+            Uppsala University<br>
+            <a href="mailto:vahid.azimi-mousolou@physics.uu.se">vahid.azimi-mousolou@physics.uu.se</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="alt" id="acknowledgments">
+      <div class="container">
+        <p class="section-label">Acknowledgments</p>
+        <h2>Support</h2>
+        <p class="lead">
+          We gratefully acknowledge support from
+          <a href="https://www.essenceofescience.se/w/es/en" target="_blank" rel="noopener">eSSENCE</a>.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <strong>Numerical Methods in Quantum Spin Dynamics</strong><br>
+        Swedish e-Science Academy Satellite · Uppsala · 14 October 2026
+      </div>
+      <div>
+        Contact:
+        <a href="mailto:davoud.mirzaei@it.uu.se">davoud.mirzaei@it.uu.se</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
