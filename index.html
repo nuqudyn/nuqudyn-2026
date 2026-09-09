@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Swedish e-Science Academy Satellite on Numerical Methods in Quantum Spin Dynamics, Uppsala, October 14, 2026.">
   <title>Numerical Methods in Quantum Spin Dynamics | Uppsala 2026</title>
 
@@ -33,7 +33,7 @@
       font-family: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
       color: var(--ink);
       background: var(--paper);
-      line-height: 1.7;
+      line-height: 1.5;
     }
 
     a {
@@ -147,7 +147,7 @@
     .hero h1 {
       margin: 0 0 18px;
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.8rem, 7vw, 5.7rem);
+      font-size: clamp(2.8rem, 7vw, 3.5rem);
       line-height: 0.98;
       font-weight: 700;
       max-width: 900px;
@@ -206,7 +206,7 @@
     h2 {
       margin: 0 0 25px;
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(2rem, 4vw, 2rem);
       line-height: 1.15;
       color: var(--ink);
     }
@@ -218,7 +218,7 @@
 
     .lead {
       max-width: 880px;
-      font-size: 1.17rem;
+      font-size: 1.0rem;
       color: #354256;
     }
 
@@ -254,13 +254,13 @@
       background: var(--accent);
       color: white;
       font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.25rem;
+      font-size: 1rem;
       margin-bottom: 18px;
     }
 
     .speaker h3 {
       margin-bottom: 4px;
-      font-size: 1.35rem;
+      font-size: 1.1rem;
     }
 
     .speaker p {
@@ -355,7 +355,7 @@
 
     .talk h3 {
       font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.55rem;
+      font-size: 1.4rem;
       margin-bottom: 8px;
     }
 
@@ -385,7 +385,7 @@
 
     .person strong {
       display: block;
-      font-size: 1.08rem;
+      font-size: 1.0rem;
       margin-bottom: 5px;
     }
 
@@ -496,7 +496,7 @@
         <span>Ångström Laboratory · Uppsala</span>
       </div>
     </div>
-    <div class="photo-note">Replace <strong>images/uppsala.jpg</strong> with your preferred Uppsala photo</div>
+    
   </header>
 
   <main>
@@ -624,35 +624,27 @@
             Erik Aurell · KTH Royal Institute of Technology, Stockholm, Sweden
           </div>
 
-          <div class="abstract">
+          <div class="abstract">          
             <p>
-              The time evolution of a quantum system interacting with an Ohmic bath of harmonic oscillators
-              is one of the most widely studied models of open quantum systems theory. It applies to many
-              physical situations in which damping becomes friction-like, or frequency independent, in the
-              semiclassical limit, including photon and phonon baths and superconducting qubits coupled to
-              resistive elements in quantum circuits.
+               The time evolution of a quantum system interacting with an Ohmic bath of harmonic oscillators is one of the most widely studied models of open quantum systems theory. 
+               It is applicable in numerous physical situations where the damping becomes friction-like (frequency independent) in the semiclassical limit,
+               such as for photon and phonon baths, as well as  superconducting qubits coupled to resistive elements in quantum circuits.          
+              Caldeira and Leggett famously used this model to investigate the classical limit of quantum Brownian motion and macroscopic tunnelling. 
+              An important conceptual problem with this model is that a straightforward high-temperature limit leads to a quantum Markov evolution which is not a CPTP map. 
+              In the language of Lindblad equations one of the jump rates is slightly negative, hence, in fact, the evolution is not governed by a proper Lindblad equation.      
             </p>
-
             <p>
-              Caldeira and Leggett famously used this model to investigate the classical limit of quantum
-              Brownian motion and macroscopic tunnelling. An important conceptual difficulty is that a
-              straightforward high-temperature limit leads to a quantum Markov evolution that is not a
-              completely positive trace-preserving (CPTP) map. In the language of Lindblad equations, one
-              of the jump rates is slightly negative, and the evolution is therefore not governed by a
-              proper Lindblad equation.
+               The problem has been known for a long time and addressed e.g. by adding a phenomenological term which can be shown to vanish in the high temperature limit (Breuer, H.-P., & Petruccione, F. (2002).”
+               The theory of open quantum systems”. Oxford University Press), more recent contributions include L. Ferialdi (2017) ”Dissipation in the Caldeira-Leggett model”, Phys. Rev. A, 95: 052109. 
+              In this lecture I will revisit the model, and derive an additional contribution to the decoherence kernel in a new high-temperature limit at arbitrarily large cut-off frequency. 
+              The resulting evolution is that of Lindblad equation with only positive jump rates, which hence solves the problem. 
+              The new contribution reveals a new mechanism for classicalization of high-frequency quantum fluctuations, as they are damped. 
+              I will also discuss end contributions to the Feynman-Vernon kernel, earlier considered by Hänggi and others, but which can be discussed 
+              a little differently taking into account also the new contribution to the high-temperature limit. 
+              Finally, I will discuss the opposite low-temperature limit and Feynman-Vernon kernel with long-time memory.    
             </p>
-
-            <p>
-              In this talk, the model will be revisited and an additional contribution to the decoherence
-              kernel will be derived in a new high-temperature limit at arbitrarily large cut-off frequency.
-              The resulting evolution is a Lindblad equation with positive jump rates. The additional term
-              reveals a mechanism for the classicalization of high-frequency quantum fluctuations through
-              damping. End contributions to the Feynman–Vernon kernel and the opposite low-temperature
-              regime, where long-time memory becomes important, will also be discussed.
-            </p>
-
             <p class="small">
-              Based on joint work with Graeme Pleasance and Francesco Petruccione,
+              The talk is based on joint work with Graeme Pleasance and Francesco Petruccione available at 
               <em>Physical Review Letters</em> 137(5), 050405 (2026).
             </p>
           </div>
