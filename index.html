@@ -684,7 +684,23 @@
           </div>
 
           <div class="abstract">
-            <p><em>Abstract to be announced.</em></p>
+            <p>
+              Tensor compression is an important tool for reducing the computational cost of quantum many-body problems. 
+              In fermionic representations, including those associated with certain quantum spin models, 
+              the approximation must respect antisymmetry under particle exchange. This motivates the development 
+              of compression methods that preserve this structure explicitly.
+              <p>
+              <p>
+              In this talk, we will present two complementary approaches to approximating real antisymmetric tensors. 
+                The first uses Tucker decompositions with a common orthonormal factor in every mode and an antisymmetric core, corresponding to a reduced single-particle space. 
+                We will discuss approximations by the higher-order singular value decomposition and a Jacobi algorithm that preserves antisymmetry throughout its iterations. 
+                The second approach uses antisymmetrized outer products. 
+                For third-order tensors, these yield compact approximations represented by only three vectors, which can be computed using a structure-preserving alternating 
+                least squares algorithm. A central connection between these approaches is that the best approximation at the smallest nonzero multilinear rank corresponds to 
+                a single Slater determinant and can be obtained from a best unstructured rank-one approximation. Numerical examples illustrate the 
+                approximation quality and computational behavior of the proposed methods.
+
+            </p>
           </div>
         </article>
       </div>
